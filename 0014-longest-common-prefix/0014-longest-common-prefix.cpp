@@ -20,7 +20,7 @@ public:
             prefixCount = min(i,prefixCount);
         }
 
-        if(prefixCount == 0)
+        if(prefixCount < 1)
         {
             return "";
         }else
