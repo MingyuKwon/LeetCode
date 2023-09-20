@@ -6,17 +6,7 @@ public:
 
         for(int i=0; i<=haystacklength - needlelength; i++)
         {
-            int j=0;
-
-            for(; j< needlelength; j++)
-            {
-               if(haystack[i+j] != needle[j]) 
-               {
-                   break;
-               }
-            }
-
-            if(j == needlelength)
+            if(haystack.substr(i,needlelength) == needle)
             {
                 return i;
             }
