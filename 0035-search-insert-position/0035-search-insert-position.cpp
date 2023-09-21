@@ -26,18 +26,7 @@ public:
             }
         }
         
-        if(max == -1)
-        {
-            return 0;
-        }
+        return min;
         
-        
-        if(nums[max] < target)
-        {
-            return min;
-        }else
-        {
-            return max;
-        }
     }
 };
