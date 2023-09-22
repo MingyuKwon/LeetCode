@@ -11,26 +11,26 @@
  */
 class Solution {
 public:
-    void Recursive(TreeNode* node, vector<int>& resultVector)
-    {
-        if(node == NULL) return;
-
-        if(node->left != NULL)
-        {
-            Recursive(node->left,resultVector);
-        }
-
-        resultVector.push_back(node->val);
-
-        if(node->right != NULL)
-        {
-            Recursive(node->right,resultVector);
-        }
-    }
-
     vector<int> inorderTraversal(TreeNode* root) {
         vector<int> resultVector;
-        Recursive(root, resultVector);  
+        
+        stack<TreeNode*> STACK;
+
+        while(!STACK.empty() || root != NULL)
+        {
+            if(root != NULL)
+            {
+                STACK.push(root);
+                root = root->left;
+            }else
+            {
+                TreeNode* topStackNode = STACK.top();
+                resultVector.push_back(topStackNode->val);
+                STACK.pop();
+                root = topStackNode->right;
+            }
+        }
+
         return resultVector;
 
     }
