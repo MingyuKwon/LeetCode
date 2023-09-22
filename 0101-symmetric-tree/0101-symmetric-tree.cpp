@@ -11,34 +11,45 @@
  */
 class Solution {
 public:
-    bool Recursive(TreeNode* leftnode, TreeNode* rightnode ){
-        if(leftnode == NULL && rightnode == NULL) return true;
-        if(leftnode != NULL && rightnode == NULL) return false;
-        if(leftnode == NULL && rightnode != NULL) return false;
+    bool isSymmetric(TreeNode* root) {
+        if(root == NULL) return true;
 
-        if(leftnode->val != rightnode->val)
-        {
-            return false;
-        }
+        stack<TreeNode*> leftTreeStack;
+        stack<TreeNode*> rightTreeStack;
 
-        if(!Recursive(leftnode->left, rightnode->right))
-        {
-            return false;
-        }
+        TreeNode* rootLeft = root->left;
+        TreeNode* rootRight = root->right;
 
-        if(!Recursive(leftnode->right, rightnode->left))
+        while((rootLeft != NULL || !leftTreeStack.empty()) || (rootRight != NULL || !rightTreeStack.empty()))
         {
-            return false;
+            if(rootLeft != NULL && rootRight != NULL)
+            {
+                leftTreeStack.push(rootLeft);
+                rightTreeStack.push(rootRight);
+
+                rootLeft = rootLeft->left;
+                rootRight = rootRight->right;
+
+            }else if(rootLeft == NULL && rootRight == NULL){
+                TreeNode* rootLeftTemp = leftTreeStack.top();
+                TreeNode* rootRightTemp = rightTreeStack.top();
+
+                if(rootLeftTemp->val != rootRightTemp->val) return false;
+
+                rootLeft = rootLeftTemp->right;
+                rootRight = rootRightTemp->left;
+
+                leftTreeStack.pop();
+                rightTreeStack.pop();
+
+            }else
+            {
+                return false;
+            }
         }
 
         return true;
 
-
-
-    }
-
-    bool isSymmetric(TreeNode* root) {
-        if(root == NULL) return true;
-        return Recursive(root->left, root->right);
+        
     }
 };
