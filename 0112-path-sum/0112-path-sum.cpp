@@ -15,28 +15,10 @@ public:
     {
         if(!root) return false;
 
-        return recursive(root, targetSum);
+        if(!root->left && !root->right) return targetSum == root->val;
+
+        return hasPathSum(root->left, targetSum - root->val) || hasPathSum(root->right, targetSum - root->val);
+
     }
 
-    bool recursive(TreeNode* root, int targetSum) {
-        if(!root) return (targetSum == 0);
-        
-        bool left = recursive(root->left, targetSum - root->val);
-        bool right = recursive(root->right, targetSum - root->val);
-
-        if(!root->left && !root->right)
-        {
-            return left || right;
-        }else if(root->left && root->right)
-        {
-            return left || right;
-        }else if(root->left == NULL && root->right != NULL )
-        {
-            return right;
-        }else
-        {
-            return left;
-        }
-        
-    }
 };
