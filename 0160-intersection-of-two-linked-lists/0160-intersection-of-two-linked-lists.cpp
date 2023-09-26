@@ -9,20 +9,34 @@
 class Solution {
 public:
     ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
-        unordered_map<ListNode*, int> hasMap;
+        //getting the tail
+    ListNode* tail = headA;
+    while(tail->next){
+        tail = tail->next;
+    }
 
-        while(headA)
-        {
-            hasMap[headA] = true;
-            headA = headA->next;
-        }
+    //creating a loop
+    tail->next = headA;
 
-        while(headB)
-        {
-            if(hasMap.find(headB) != hasMap.end()) return headB;
-            headB = headB->next;
-        }
+    //detecting and finding the intersection
+    ListNode *fast = headB, *slow = headB;
 
-        return NULL;
+    while(fast && fast->next){
+        slow = slow->next;
+        fast = fast->next->next;
+
+        if(slow==fast) {
+            slow = headB;
+            while(slow!=fast){
+                slow = slow->next;
+                fast = fast->next;
+            }
+            //undoing the loop
+            tail->next = NULL;
+            return slow;
+        };
+    }
+    tail->next = NULL;
+    return NULL;
     }
 };
