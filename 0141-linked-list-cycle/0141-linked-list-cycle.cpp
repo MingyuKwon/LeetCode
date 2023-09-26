@@ -9,19 +9,15 @@
 class Solution {
 public:
     bool hasCycle(ListNode *head) {
-        unordered_map<ListNode*, bool> HashMap;
+        ListNode* fast = head;
+        ListNode* slow = head;
 
-        while(head)
+        while(fast && fast->next)
         {
-            if(HashMap.find(head) == HashMap.end())
-            {
-                HashMap[head] = false;
-            }else
-            {
-                return true;
-            }
+            fast = fast->next->next;
+            slow = slow -> next;
 
-            head = head->next;
+            if(fast == slow) return true;
         }
 
         return false;
