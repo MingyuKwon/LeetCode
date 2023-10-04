@@ -9,14 +9,14 @@ public:
     
     void push(int x) {
 
-        Queue2.push(x);
-        while(!Queue1.empty())
+        Queue1.push(x);
+        int queueSize = Queue1.size();
+
+        while(--queueSize > 0)
         {
-            Queue2.push(Queue1.front());
+            Queue1.push(Queue1.front());
             Queue1.pop();
         }
-
-        swap(Queue2, Queue1);
     }
     
     int pop() {
@@ -35,7 +35,6 @@ public:
 
 private:
     queue<int> Queue1;
-    queue<int> Queue2;
 };
 
 /**
