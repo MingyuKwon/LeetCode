@@ -4,7 +4,7 @@ public:
 
         if(n <= 0) return false;
 
-        return not(n & n-1);
+        return (n & n-1) == 0;
     }
 };
 
