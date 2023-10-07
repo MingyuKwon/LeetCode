@@ -3,17 +3,21 @@ public:
     vector<int> VECTORS;
 
     NumArray(vector<int>& nums) {
-        VECTORS = nums;
+        int sum = 0;
+        for(int I : nums)
+        {
+            sum += I;
+            VECTORS.push_back(sum);
+        }
     }
     
     int sumRange(int left, int right) {
-        int sum = 0;
-        for(int i=left; i<= right; i++)
+        if(left == 0)
         {
-            sum += VECTORS[i];
+            return VECTORS[right];
         }
-
-        return sum;
+        
+        return VECTORS[right] - VECTORS[left-1];
     }
 };
 
