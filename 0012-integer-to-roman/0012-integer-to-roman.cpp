@@ -1,36 +1,24 @@
 class Solution {
 public:
     string intToRoman(int num) {
-        int VECTOR[] = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
-        unordered_map<int, string> HashMap;
         string ans = "";
+        vector<pair<int, string>> VECTOR = {{1000, "M"}, {900, "CM"}, {500, "D"}, {400, "CD"}, {100, "C"}, {90, "XC"}, {50, "L"}, {40, "XL"}, {10, "X"}, {9, "IX"}, {5, "V"}, {4, "IV"}, {1, "I"}};
 
-        HashMap[1000] = "M";
-        HashMap[900] = "CM";
-        HashMap[500] = "D";
-        HashMap[400] = "CD";
-        HashMap[100] = "C";
-        HashMap[90] = "XC";
-        HashMap[50] = "L";
-        HashMap[40] = "XL";
-        HashMap[10] = "X";
-        HashMap[9] = "IX";
-        HashMap[5] = "V";
-        HashMap[4] = "IV";
-        HashMap[1] = "I";
-
-        for(int i : VECTOR)
+        for(auto i : VECTOR)
         {
-            int temp = num / i;
+            int temp = num / i.first;
             while(temp > 0)
             {
-                ans += HashMap[i];
+                ans += i.second;
                 temp--;
             }
 
-            num %= i;
+            num %= i.first;
         }
 
         return ans;
     }
+    
+    
+    // pair을 잘 사용하도록 하자. 기본으로 제공하는 map 경우 말고도, vector에 담을 수 있는 경우도 있다
 };
