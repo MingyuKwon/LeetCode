@@ -1,23 +1,9 @@
 class Solution {
 public:
     string intToRoman(int num) {
-        vector<int> VECTOR;
+        int VECTOR[] = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
         unordered_map<int, string> HashMap;
         string ans = "";
-
-        VECTOR.push_back(1000);
-        VECTOR.push_back(900);
-        VECTOR.push_back(500);
-        VECTOR.push_back(400);
-        VECTOR.push_back(100);
-        VECTOR.push_back(90);
-        VECTOR.push_back(50);
-        VECTOR.push_back(40);
-        VECTOR.push_back(10);
-        VECTOR.push_back(9);
-        VECTOR.push_back(5);
-        VECTOR.push_back(4);
-        VECTOR.push_back(1);
 
         HashMap[1000] = "M";
         HashMap[900] = "CM";
