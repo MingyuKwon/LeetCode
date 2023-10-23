@@ -19,9 +19,7 @@ public:
             return;
         }
 
-        for(char c : HashMap[digits[0]])
-        {
-            Recursive(ans, str + c, (digits.size() > 1) ? digits.substr(1, digits.size() -1) : "");
-        }
+        for(char c : HashMap[digits[0]]) Recursive(ans, str + c, (digits.size() > 1) ? digits.substr(1, digits.size() -1) : "");
+        
     }
 };
