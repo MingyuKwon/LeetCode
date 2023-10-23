@@ -11,32 +11,30 @@
 class Solution {
 public:
     ListNode* deleteMiddle(ListNode* head) {
-        int middle = 0;
-        ListNode* temp = head;
-        while(temp)
+        ListNode* slow = head;
+        ListNode* fast = head;
+        ListNode* previous = NULL;
+
+        while(fast && fast->next)
         {
-            middle++;
-            temp = temp->next;
-        } 
+            fast = fast->next->next;
+            previous = slow;
+            slow = slow->next;
+        }
 
-        if(middle == 1) return NULL;
-
-        temp = head;
-        ListNode* previousNode = NULL;
-        int index = 0;
-        middle = middle / 2;
-        while(temp)
+        if(previous)
         {
-            if(middle == index)
-            {
-                previousNode->next = temp->next;
-            }
-
-            previousNode = temp;
-            temp = temp->next;
-            index++;
+            previous->next = slow->next;
+        }else
+        {
+            head = NULL;
         }
 
         return head;
     }
+
+    // 그냥 index로 중간 값을 찾아도 좋지만, fast slow pointer를 사용하면 더 좋다
+    // fast slow pointer는 원래 사이클을 찾기 위한 방법이지만, 사이클이 없어도 특성 이용가능
+    // slow는 fast의 절반을 가므로, 최종적으로 slow는 직선 링크드 리스트에서 중간점에서 멈추게 될 것이다.  
+    // 따라서 slow에 뒤에 붙는 previous pointer 하나를 가지고 진행하면 된다
 };
