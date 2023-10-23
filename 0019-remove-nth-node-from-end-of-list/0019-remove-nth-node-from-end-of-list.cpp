@@ -40,4 +40,6 @@ public:
         }
         return value + 1;
     }
+    
+    // LinkedList에서 노드를 지울 떄는 반드시 반드시 헤더 노드를 지우는 경우를 감안해야 한다!
 };
