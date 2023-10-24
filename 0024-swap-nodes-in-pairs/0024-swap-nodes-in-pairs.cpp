@@ -11,44 +11,16 @@
 class Solution {
 public:
     ListNode* swapPairs(ListNode* head) {
-        bool isEven = false;
+        if(!head || !head->next) return head;
 
-        ListNode* current = head;
-        ListNode* previous = NULL;
-        ListNode* preprevious = NULL;
-        ListNode* next = NULL;
+        ListNode* temp = head->next;
+        head->next = swapPairs(head->next->next);
+        temp->next = head;
 
-        while(current)
-        {
-            next = current->next;
-
-            if(isEven)
-            {
-                if(head == previous) 
-                {
-                    head = current;
-                }else
-                {
-                    preprevious->next = current;
-                }
-
-                previous->next = current->next;
-                current->next = previous;
-
-                preprevious = current;
-            }else
-            {
-                preprevious = previous;
-                previous = current;
-            }
-
-            isEven = !isEven;
-            current = next;
-
-        }
-
-        return head;
-
-
+        return temp;
     }
+
+    // 재귀는 작은 단위를 다루는 함수만 시킬 수 있는 것이 아니다
+    // 마치 분할 정복처럼 1~n을 다루는 문제를 2~n , 3~n .... n-1~n 을 다루는 문제로 바꿀 수 있다
+    // 즉 전체를 변형하는 함수를 작은 범위에서 또 호출해서 푸는 재귀도 있는 것이다!
 };
