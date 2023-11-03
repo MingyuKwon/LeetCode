@@ -28,4 +28,7 @@ public:
             nums.insert(nums.begin() + i, value);
         }
     }
+    
+    // 중복 쳐내고 경우의 수 생각해 보기
+    // -> 전체 정렬한다음에 i와 i-1가 같으면 넘어가기
 };
