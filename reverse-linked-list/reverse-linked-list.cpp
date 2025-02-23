@@ -10,28 +10,15 @@
  */
 class Solution {
 public:
-    ListNode* ans = nullptr;
-
-    ListNode* solve(ListNode* head) {
-        if(head == nullptr) return nullptr;
-
-        ListNode* next = solve(head->next);
-        if(next)
-        {
-            next->next = head;
-        }else
-        {
-            ans = head;
-        }
-
-        head->next = nullptr;
-
-        return head;
-    }
-
     ListNode* reverseList(ListNode* head)
     {
-        solve(head);
-        return ans;
+        if(head == nullptr || head->next == nullptr) return head;
+
+        ListNode* root = reverseList(head->next);
+
+        head->next->next = head;
+        head->next = nullptr;
+
+        return root;
     }
 };
